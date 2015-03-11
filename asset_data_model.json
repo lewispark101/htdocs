@@ -1,0 +1,643 @@
+{
+    "nodes": [
+        {
+            "name": "Asset Data Model",
+            "domain": "Asset Data Model",
+            "source": "yes"
+        },
+        {
+            "name": "Civil Structure Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Civil Structure Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Civil Structure Physical Asset Measurements",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Equipment Component Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Equipment Component Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Equipment Component Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Connection Point Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Connection Point Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Functional Requirement Fulfilment",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Equipment Component Store",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Catalogue Item Bill Of Materials",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Bill Of Materials Item Part",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Equipment Group",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Equipment Group Component",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Hazardous Materials Inventory",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Cable Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Cable Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Cable Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Cable Tray Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Cable Tray Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Cable Tray Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Combustion Engine Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Combustion Engine Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Combustion Engine Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Compressor Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Compressor Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Compressor Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Controlled Logic Unit Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Controlled Logic Unit Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Controlled Logic Unit Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Crane Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Crane Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Crane Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Electric Generator Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Electric Generator Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Electric Generator Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Electric Motor Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Electric Motor Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Electric Motor Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Embedded Software Or Firmware Data Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Embedded Software Or Firmware Data Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Embedded Software Or Firmware Data Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Fire And Gas Detector Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Fire And Gas Detector Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Fire And Gas Detector Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Heat Exchanger Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Heat Exchanger Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Heat Exchanger Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Heater And Boiler Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Heater And Boiler Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Heater And Boiler Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Input Device Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Input Device Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Input Device Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Nozzle Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Nozzle Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Nozzle Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Penetration Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Penetration Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Penetration Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Pipework Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Pipework Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Pipework Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Power Transformer Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Power Transformer Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Power Transformer Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Pump Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Pump Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Pump Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Valve Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Valve Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Valve Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Vessel & Tanks Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Vessel & Tanks Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Vessel & Tanks Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Winch Attributes Functional Requirement",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Winch Attributes Catalogue Item",
+            "domain": "Asset Data Model"
+        },
+        {
+            "name": "Winch Attributes Physical Asset",
+            "domain": "Asset Data Model"
+        }
+    ],
+    "links": [
+        {
+            "source": 0,
+            "target": 1
+        },
+        {
+            "source": 0,
+            "target": 2
+        },
+        {
+            "source": 0,
+            "target": 4
+        },
+        {
+            "source": 0,
+            "target": 5
+        },
+        {
+            "source": 0,
+            "target": 6
+        },
+        {
+            "source": 0,
+            "target": 10
+        },
+        {
+            "source": 5,
+            "target": 11
+        },
+        {
+            "source": 11,
+            "target": 12
+        },
+        {
+            "source": 1,
+            "target": 15
+        },
+        {
+            "source": 1,
+            "target": 9
+        },
+        {
+            "source": 2,
+            "target": 9
+        },
+        {
+            "source": 2,
+            "target": 3
+        },
+        {
+            "source": 4,
+            "target": 7
+        },
+        {
+            "source": 6,
+            "target": 8
+        },
+        {
+            "source": 10,
+            "target": 9
+        },
+        {
+            "source": 4,
+            "target": 14
+        },
+        {
+            "source": 14,
+            "target": 13
+        },
+        {
+            "source": 16,
+            "target": 4
+        },
+        {
+            "source": 17,
+            "target": 5
+        },
+        {
+            "source": 18,
+            "target": 6
+        },
+        {
+            "source": 19,
+            "target": 1
+        },
+        {
+            "source": 20,
+            "target": 2
+        },
+        {
+            "source": 21,
+            "target": 2
+        },
+        {
+            "source": 22,
+            "target": 4
+        },
+        {
+            "source": 23,
+            "target": 5
+        },
+        {
+            "source": 24,
+            "target": 6
+        },
+        {
+            "source": 25,
+            "target": 4
+        },
+        {
+            "source": 26,
+            "target": 5
+        },
+        {
+            "source": 27,
+            "target": 6
+        },
+        {
+            "source": 28,
+            "target": 4
+        },
+        {
+            "source": 29,
+            "target": 5
+        },
+        {
+            "source": 30,
+            "target": 6
+        },
+        {
+            "source": 31,
+            "target": 4
+        },
+        {
+            "source": 32,
+            "target": 5
+        },
+        {
+            "source": 33,
+            "target": 6
+        },
+        {
+            "source": 34,
+            "target": 4
+        },
+        {
+            "source": 35,
+            "target": 5
+        },
+        {
+            "source": 36,
+            "target": 6
+        },
+        {
+            "source": 37,
+            "target": 4
+        },
+        {
+            "source": 38,
+            "target": 5
+        },
+        {
+            "source": 39,
+            "target": 6
+        },
+        {
+            "source": 40,
+            "target": 4
+        },
+        {
+            "source": 41,
+            "target": 5
+        },
+        {
+            "source": 42,
+            "target": 6
+        },
+        {
+            "source": 43,
+            "target": 4
+        },
+        {
+            "source": 44,
+            "target": 5
+        },
+        {
+            "source": 45,
+            "target": 6
+        },
+        {
+            "source": 46,
+            "target": 4
+        },
+        {
+            "source": 47,
+            "target": 5
+        },
+        {
+            "source": 48,
+            "target": 6
+        },
+        {
+            "source": 49,
+            "target": 4
+        },
+        {
+            "source": 50,
+            "target": 5
+        },
+        {
+            "source": 51,
+            "target": 6
+        },
+        {
+            "source": 52,
+            "target": 4
+        },
+        {
+            "source": 53,
+            "target": 5
+        },
+        {
+            "source": 54,
+            "target": 6
+        },
+        {
+            "source": 55,
+            "target": 4
+        },
+        {
+            "source": 56,
+            "target": 5
+        },
+        {
+            "source": 57,
+            "target": 6
+        },
+        {
+            "source": 58,
+            "target": 1
+        },
+        {
+            "source": 59,
+            "target": 2
+        },
+        {
+            "source": 60,
+            "target": 2
+        },
+        {
+            "source": 61,
+            "target": 4
+        },
+        {
+            "source": 62,
+            "target": 5
+        },
+        {
+            "source": 63,
+            "target": 6
+        },
+        {
+            "source": 64,
+            "target": 4
+        },
+        {
+            "source": 65,
+            "target": 5
+        },
+        {
+            "source": 66,
+            "target": 6
+        },
+        {
+            "source": 67,
+            "target": 4
+        },
+        {
+            "source": 68,
+            "target": 5
+        },
+        {
+            "source": 69,
+            "target": 6
+        },
+        {
+            "source": 70,
+            "target": 4
+        },
+        {
+            "source": 71,
+            "target": 5
+        },
+        {
+            "source": 72,
+            "target": 6
+        },
+        {
+            "source": 73,
+            "target": 4
+        },
+        {
+            "source": 74,
+            "target": 5
+        },
+        {
+            "source": 75,
+            "target": 6
+        },
+        {
+            "source": 76,
+            "target": 4
+        },
+        {
+            "source": 77,
+            "target": 5
+        },
+        {
+            "source": 78,
+            "target": 6
+        }
+    ]
+}
