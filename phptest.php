@@ -10,6 +10,6 @@ Name:
 Search Term:
 <br /><input type="text" name="searchterm">
 <input type="submit" name="submit" value="search">
-</form>
+</form>			
 </body>
 </html>

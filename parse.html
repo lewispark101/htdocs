@@ -52,7 +52,7 @@
 
 .node text {
   stroke: #000000;
-  stroke-width: 0.5px;
+  stroke-width: 1px;
   font: 12px helvetica;
 }
 
@@ -98,10 +98,10 @@ d3-tip {
     </div><!-- /.navbar-collapse -->
   </div><!-- /.container-fluid -->
 </nav>
-<!--  <div class="ui-widget">
+  <!--<div class="ui-widget">
    <input id="search">
     <button type="button" onclick="searchNode()">Search</button>
-</div> -->
+</div>-->
 
   <!--main visualisation script-->
     
@@ -109,7 +109,7 @@ d3-tip {
     var padding = 20;
     var border=1;
     var bordercolor='black';
-    var width = 1700,
+    var width = 1600,
     height = 800
  
 
@@ -130,24 +130,24 @@ var svg = d3.select("body").append("svg")
 var force = d3.layout.force()
     .gravity(.05)
     .distance(100)
-    .charge(-200)
+    .charge(-400)
     .size([width, height]);
 
 
 
 //var links = "db3.php";
 
-//document.print "db3.php";
-//document.write(get("db3.php")); 
 
-d3.json("asset_data_model.json", function(error, json) {
+
+d3.json("nodesandlinks.php", function(error, json) {
   force
       .nodes(json.nodes)
-     .links(json.links)
+    // .links(json.links)
       .start();
 
   var toggle = 0;
 //Create an array logging what is connected to what
+/*
 var linkedByIndex = {};
 for (i = 0; i < json.nodes.length; i++) {
     linkedByIndex[i + "," + i] = 1;
@@ -155,11 +155,12 @@ for (i = 0; i < json.nodes.length; i++) {
 json.links.forEach(function (d) {
     linkedByIndex[d.source.index + "," + d.target.index] = 1;
 });
+*/
 
-  var link = svg.selectAll(".link")
+/*  var link = svg.selectAll(".link")
       .data(json.links)
     .enter().append("line")
-      .attr("class", "link"); 
+      .attr("class", "link"); */
 
   var node = svg.selectAll(".node")
       .data(json.nodes)
@@ -203,14 +204,14 @@ json.links.forEach(function (d) {
 
 
  
-  force.on("tick", function() {
-    link.attr("x1", function(d) { return d.source.x; })
-        .attr("y1", function(d) { return d.source.y; })
-        .attr("x2", function(d) { return d.target.x; })
-        .attr("y2", function(d) { return d.target.y; });
+ force.on("tick", function() {
+  //  link.attr("x1", function(d) { return d.source.x; })
+   //     .attr("y1", function(d) { return d.source.y; })
+    //    .attr("x2", function(d) { return d.target.x; })
+     //   .attr("y2", function(d) { return d.target.y; });
 
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
-  });
+  }); 
 
 
 function mouseover() {
