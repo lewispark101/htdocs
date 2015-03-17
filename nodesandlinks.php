@@ -6,13 +6,14 @@
     
     $server = mysql_connect($host, $username, $password);
     $connection = mysql_select_db($database, $server);
-    $asset = "Asset Data Model";
+    
     $myquery = "
-SELECT * FROM `objects` LIMIT 10";
+SELECT * FROM items_2 = 'Asset Data Model'
+";
     $query = mysql_query($myquery);
 
     $myrels = "
-    SELECT * FROM links
+    SELECT * FROM links where source = 'Asset Data Model'
     ";
     $myrels = mysql_query($myrels);
     
@@ -30,11 +31,11 @@ SELECT * FROM `objects` LIMIT 10";
 
     $reldata = array();
     
-    for ($x = 1; $x < mysql_num_rows($query); $x++) {
+    for ($x = 1-1; $x < mysql_num_rows($query); $x++) {
         $data[] = mysql_fetch_assoc($query);
     }
 
-    for ($x = 1;$x < mysql_num_rows($myrels); $x++) {
+    for ($x = 1-1;$x < mysql_num_rows($myrels); $x++) {
         $reldata[] = mysql_fetch_assoc($myrels);
     }
     echo "{\"nodes\":";
