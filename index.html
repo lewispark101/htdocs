@@ -31,11 +31,11 @@ var svg = d3.select("body").append("svg")
     .attr("width", width)
     .attr("height", height);
 
-d3.json("nodesandlinks.php", function(error, json) {
+d3.json("new_conn.php", function(error, json) {
   var edges = [];
     json.links.forEach(function(e) { 
-    var sourceNode = json.nodes.filter(function(n) { return n.name === e.source; })[0],
-    targetNode = json.nodes.filter(function(n) { return n.name === e.target; })[0];
+    var sourceNode = json.nodes.filter(function(n) { return n.object_name === e.object_name; })[0],
+    targetNode = json.nodes.filter(function(n) { return n.object_name === e.field_name; })[0];
       
     edges.push({source: sourceNode, target: targetNode, value: e.Value});
     });

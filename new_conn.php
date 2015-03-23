@@ -2,19 +2,36 @@
     $username = "testuser"; 
     $password = "password";   
     $host = "localhost";
-    $database="test";
+    $database="i_dictionary";
 
     $mysqli = new mysqli($host,$username,$password,$database);
 
     $item = 'Asset Data Model';
-
+    $source = 'Asset Data Model';
     $q1 = "select * from test.objects where name in (select target from test.links where source = ?) or name in (select source from test.links where target = ?) or name = ?";
 
     $myarray = array();
     $stmt = $mysqli->stmt_init();
-    if ($stmt->prepare("select * from test.objects where name in (select target from test.links where source = ?) or name in (select source from test.links where target = ?) or name = ?")){
+    if ($stmt->prepare("select * 
+        from i_dictionary.item_dictionary 
+        where object_name in 
+            ( select object_name 
+            from item_dictionary 
+            where item_type_code = 'HPC.Item.Relationship' 
+            and field_name = ? 
+            ) 
+        or object_name in 
+            ( select field_name 
+            from item_dictionary 
+            where object_name = ? 
+            and item_type_code = 'HPC.Item.Relationship' 
+            ) 
+        and item_type_code = 'HPC.Item.DataObject'
+        and item_source = ?
+        or item_type_code = 'HPC.Item.DataSource' and object_name = ?"
+        )){
         $temparray = array();
-        $stmt->bind_param("sss",$item,$item,$item);
+        $stmt->bind_param("ssss",$item,$item,$item,$item);
         $stmt->execute();
         $result = $stmt->get_result();
         while($row = $result->fetch_object()) {
@@ -28,7 +45,7 @@
 
     $myarray2 = array();
     $stmt2 = $mysqli->stmt_init();
-    if ($stmt2->prepare("select * from links where source = ? or target = ?")){
+    if ($stmt2->prepare("select * from i_dictionary.item_dictionary where field_name = ? or object_name = ? and item_type_code = 'HPC.Item.Relationship'")){
         $temparray2 = array();
         $stmt2->bind_param("ss",$item,$item);
         $stmt2->execute();
@@ -41,33 +58,6 @@
         echo json_encode($myarray2);
         echo "}";
     }
-
-
-    /*if ($result = $mysqli->query("select * from test.objects where name in (select target from test.links where source = 'Asset Data Model') or name in (select source from test.links where target = 'Asset Data Model') or name = 'Asset Data Model'")) {
-        if ($result = $mysqli->query("select * from test.objects where name in (select target from test.links where source = 'Asset Data Model') or name in (select source from test.links where target = 'Asset Data Model') or name = 'Asset Data Model'")) {
-        $tempArray = array();
-        while($row = $result->fetch_object()) {
-                $tempArray = $row;
-                array_push($myArray, $tempArray);
-            }
-        echo "{\"nodes\":";
-        echo json_encode($myArray);
-        echo ",";
-    } */
-  /*  $myArray2 = array();
-    if ($result2 = $mysqli->query("select * from links where source = 'Asset Data Model' or target = 'Asset Data Model'")) {
-        $tempArray2 = array();
-        while($row2 = $result2->fetch_object()) {
-                $tempArray2 = $row2;
-                array_push($myArray2, $tempArray2);
-            }
-        echo "\"links\":";
-        echo json_encode($myArray2);
-        echo "}";
-    } */
-
-
-
 
     $result->close();
     $result2->close();
