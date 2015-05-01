@@ -1,0 +1,200 @@
+<html>
+<head>
+<script src="lib/jquery/jquery-1.11.2.js"></script>
+<script src="lib/d3/d3.v3.min.js"></script>
+<script src="lib/js/pageOperations.js"></script>
+<link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="lib/css/custCSS.css" rel="stylesheet">
+<script src="bootstrap/js/bootstrap.min.js"></script>   
+    
+</head> 
+    
+
+<body>  
+    
+<div id="container" class="container">
+    <div id="sidebar" style="display: none;">
+        <div class="item-group">
+            <label class="item-label">Filter</label>
+            <div id="filterContainer" class="filtercontainer checkbox-interaction-group"></div>
+        </div>
+    </div>
+    <div id="graphContainter" class="graphContainer"></div>
+</div>
+    
+<script>
+//start the main javascript function    
+    //variable to hold changed checklist options
+    var BUval;
+    var padding = 20;
+    var border=1;
+    var bordercolor='black';
+    var width = pageWidth() - 10,
+    height = pageHeight() - 10;
+ 
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+   /* Set up tooltip
+    var tip = d3.tip()
+    .attr('class', 'd3-tip')
+    .offset([-10, 0])
+    .html(function (d) {
+    return  d.name + "";
+})*/
+//svg.call(tip);
+
+
+var force = d3.layout.force()
+    .gravity(.05)
+    .distance(100)
+    .charge(-200)
+    .size([width, height]);
+
+
+
+//var links = "db3.php";
+
+//document.print "db3.php";
+//document.write(get("db3.php")); 
+d3.json("new_conn.php", function(error, json) {
+  var edges = [];
+    json.links.forEach(function(e) { 
+    var sourceNode = json.nodes.filter(function(n) { return n.object_name === e.object_name; })[0],
+    targetNode = json.nodes.filter(function(n) { return n.object_name === e.field_name; })[0];
+      
+    edges.push({source: sourceNode, target: targetNode, value: e.Value});
+    });
+  force
+      .nodes(json.nodes)
+     .links(edges)
+      .start();
+
+  var toggle = 0;
+
+
+  var link = svg.selectAll(".link")
+      .data(edges)
+    .enter().append("line")
+      .attr("class", "link"); 
+
+  var node = svg.selectAll(".node")
+      .data(json.nodes)
+    .enter().append("g")
+      .attr("class", "node")
+      //.on("mouseover",mouseover)
+      //.on("mouseout",mouseout)
+    // .on("mousedown",mousedown)
+     // .on("mouseup",mouseup)
+      .call(force.drag)
+      .on('dblclick', connectedNodes)
+     // .on('mouseover', tip.show) //Added
+     // .on('mouseout', tip.hide); //Added 
+
+
+
+     node.append("circle")
+     .attr("r",function(d) {if (d.item_type_code === "HPC.Item.DataSource") {return 20;} else {return 10;} })
+     .style("fill", function(d) {
+        var returncolour;
+        if (d.item_type_code === "HPC.Item.DataSource") { returncolour = "#3366cc"}
+          else {returncolour = "#ff9640"}
+            return returncolour;
+     });
+
+  node.append("svg:title")
+    .text(function(d) {return d.name});
+
+ var text =  node.append("text")
+      .attr("dx", 18)
+      .attr("dy", 0)
+      .text(function(d) { return d.object_name });
+
+       
+
+
+
+
+
+      node.on("mousedown", function(d) { d.fixed = true });
+
+
+ 
+  force.on("tick", function() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+    node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  });
+//JQUERY TO GET UPDATES TO CHECKLIST
+$(document).ready(function(){
+  $('.BU').on('change',function(){
+    BUval=$('.BU').val();
+    alert("Change on " + BUval);
+  })
+})
+
+
+
+
+function mouseover() {
+  d3.select(this).select("circle").transition()
+      .duration(750)
+      .attr("r", 16);
+  //enableThumbPopover;
+
+}
+
+function mouseout() {
+  d3.select(this).select("circle").transition()
+      .duration(750)
+      .attr("r", 8);
+}
+
+
+//This function looks up whether a pair are neighbours
+function neighboring(a, b) {
+    return linkedByIndex[a.index + "," + b.index];
+}
+function connectedNodes() {
+    if (toggle == 0) {
+        //Reduce the opacity of all but the neighbouring nodes
+        d = d3.select(this).node().__data__;
+        node.style("opacity", function (o) {
+            return neighboring(d, o) | neighboring(o, d) ? 1 : 0.1;
+        });
+        link.style("opacity", function (o) {
+            return d.index==o.source.index | d.index==o.target.index ? 1 : 0.1;
+        });
+        //Reduce the op
+        toggle = 1;
+    } else {
+        //Put them back to opacity=1
+        node.style("opacity", 1);
+        link.style("opacity", 1);
+        toggle = 0;
+    }
+}
+
+function createFilter() {
+  d3.select
+}
+
+
+
+});
+
+
+
+    //document.write(qsParm['domain']);
+    //document.write(document.referrer);
+    </script>
+
+    
+    
+</body>  
+</html>

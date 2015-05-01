@@ -1,1 +1,0 @@
-select * from test.objects where name in (select target from test.links where source = 'Asset Data Model') or name in (select source from test.links where target = 'Asset Data Model') or name = 'Asset Data Model'

@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap 101 Template</title>
+
+    <!-- Bootstrap -->
+    <link href="lib/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+      <script src="lib/d3/d3.v3.min.js"></script>
+      <script src="lib/jquery/jquery-1.11.2.js"></script>
+      <script src="lib/js/pageOperations.js"></script>
+      <script src="bootstrap/js/bootstrap.min.js"></script>
+    <!--style settings for visualisation-->
+    <link rel="stylesheet" type="text/css" href="lib/css/custCSS.css">
+
+</head>
+<body>
+
+<div id="container" class="container">
+    <div id="sidebar" style="display: none;">
+        <div class="item-group">
+            <label class="item-label">Filter</label>
+            <div id="filterContainer" class="filterContainer checkbox-interaction-group"></div>
+        </div>
+    </div>
+    <div id="graphContainer" class="graphContainer"></div>
+</div>test
+    
+<script>
+//start the main javascript function    
+    //variable to hold changed checklist options
+var BUval;
+var padding = 20;
+var border=1;
+var bordercolor='black';
+var width = pageWidth() - 10,
+    height = pageHeight() - 10;
+
+
+
+
+//import the json data and use for the D3 visualisation
+d3.json("new_conn.php", function(error, json) {
+    
+    var edges = [];
+    json.links.forEach(function(e) { 
+        var sourceNode = json.nodes.filter(function(n) { return n.object_name === e.object_name; })[0],
+        targetNode = json.nodes.filter(function(n) { return n.object_name === e.field_name; })[0];
+        edges.push({source: sourceNode, target: targetNode, value: e.Value});
+    });
+    
+    //force
+    //    .nodes(json.nodes)
+    //    .links(edges)
+    //    .start();
+    
+    var force = d3.layout.force()
+                .nodes(json.nodes)
+                .links(edges)
+                .size([width,height])
+                .linkDistance(60)
+                .charge(-300)
+                .on("tick", tick)
+                .start();
+    
+    var svg = d3.select(".graphContainer").append("svg:svg")
+                .attr("width",width)
+                .attr("height",height);
+    
+    var path = svg.append("svg:g")
+                .selectAll("path")
+                .data(force.links())
+                .enter().append("svg:path")
+                .attr("class", function (d) {
+                    return "link " + d.item_type_code;
+                });
+    
+    var circle = svg.append("svg:g")
+                .selectAll("circle")
+                .data(force.nodes())
+                .enter().append("svg:circle")
+                .attr("r",10)
+                .style("fill", function(d) {
+        
+        var returncolour;
+        
+        if (d.item_type_code == "HPC.Item.DataSource")
+        { 
+            returncolour = "#3366cc"
+        }
+        else if (d.item_type_code =="HPC.Item.DataObject.CodeList") 
+        {
+            returncolour = "#ff9640"
+        }
+        else if (d.item_type_code =="HPC.Item.DataObject") 
+        {
+            returncolour = "#980000"
+        }
+         
+        return returncolour;
+        })
+                .on("mousedown", function(d) { d.fixed = true })
+                .call(force.drag);
+    
+    var text = svg.append("svg:g")
+                .selectAll("g")
+                .data(force.nodes())
+                .enter().append("svg:g")
+                .attr("class","nodeText");
+    
+    //a copy of text in thick white to clarify
+    
+    
+    text.append("svg:text")
+                .attr("x",8)
+                .attr("y",".31em")
+                .text(function (d) {
+                    return d.object_name;
+    });
+    
+    function tick() {
+        path.attr("d", function (d) {
+            var dx = d.target.x - d.source.x,
+                dy = d.target.y - d.source.y,
+                dr = Math.sqrt(dx * dx + dy * dy);
+            return "M" + d.source.x + "," + d.source.y + "A" + dr + "," + dr + " 0 0 1," + d.target.x + "," + d.target.y;
+        });
+
+        circle.attr("transform", function (d) {
+            return "translate(" + d.x + "," + d.y + ")";
+        });
+
+        text.attr("transform", function (d) {
+            return "translate(" + d.x + "," + d.y + ")";
+        });
+    }
+        
+function mouseover() {
+  d3.select(this).select("circle").transition()
+      .duration(750)
+      .attr("r", 16);
+  //enableThumbPopover;
+
+}
+
+function mouseout() {
+  d3.select(this).select("circle").transition()
+      .duration(750)
+      .attr("r", 8);
+}
+
+
+//This function looks up whether a pair are neighbours
+function neighboring(a, b) {
+    return linkedByIndex[a.index + "," + b.index];
+}
+function connectedNodes() {
+    if (toggle == 0) {
+        //Reduce the opacity of all but the neighbouring nodes
+        d = d3.select(this).node().__data__;
+        node.style("opacity", function (o) {
+            return neighboring(d, o) | neighboring(o, d) ? 1 : 0.1;
+        });
+        link.style("opacity", function (o) {
+            return d.index==o.source.index | d.index==o.target.index ? 1 : 0.1;
+        });
+        //Reduce the op
+        toggle = 1;
+    } else {
+        //Put them back to opacity=1
+        node.style("opacity", 1);
+        link.style("opacity", 1);
+        toggle = 0;
+    }
+}
+
+//Method to create the filter 
+createFilter();
+
+    
+function createFilter() {
+    d3.select(".filterContainer").selectAll("div")
+    .data(["HPC.Item.DataObject.CodeList","HPC.Item.DataObject","HPC.Item.DataSource"])
+    .enter()
+    .append("div")
+    .attr("class","checkbox-container")
+    .append("label")
+    .each(function(d) {
+        d3.select(this).append("input")
+        .attr("type", "checkbox")
+        .attr("id", function(d) {
+            return "chk_" + d;
+        })
+        .attr("checked", true)
+        .on("click", function (d) {
+            //register on click event
+            var lVisibility = this.checked ? "visible" : "hidden";
+            filterGraph(d, lVisibility);
+            updateNodeVisibility();
+            updateLinkVisibility();
+            updateTextVisibility();
+        })
+        d3.select(this).append("span")
+        .text(function (d) {
+            return d;
+        });
+    });
+};
+$("#sidebar").show();  
+
+function filterGraph(aType, lVisibility) {
+
+    d3.selectAll('circle').each(function(d) {
+        if (d.item_type_code == aType) {
+            d.isInFilter = lVisibility;
+            } 
+    });
+   
+}
+    
+//function to update all nodes with filter 
+function updateNodeVisibility() {
+    
+        d3.selectAll('circle').each(function(d) {
+           if (d.isInFilter == 'hidden') {
+               d3.select(this).attr("r",0);
+           }
+            else if (d.isInFilter == 'visible') {
+                d3.select(this).attr("r",10)
+            }
+        });
+}
+    
+function updateLinkVisibility() {
+    var hiddenNodeNames = [];
+        d3.selectAll('circle').each(function(d) {
+           if (d.isInFilter == 'hidden') {
+               hiddenNodeNames.push(d.object_name);
+           }
+            
+        });
+    
+    d3.selectAll('path').each(function(d) {
+        if(isInArray(d.source.object_name,hiddenNodeNames) || isInArray(d.target.object_name,hiddenNodeNames) || isInArray(d.source.field_name,hiddenNodeNames) || isInArray(d.target.field_name,hiddenNodeNames))  {
+                
+                d3.select(this).style("stroke","white");
+           }
+        else { d3.select(this).style("stroke","black") };
+        
+    });
+    
+ }
+    
+function updateTextVisibility() {
+    
+        d3.selectAll('text').each(function(d) {
+           if (d.isInFilter == "hidden") {
+               d3.select(this).attr("stroke","white");
+           }
+            else if (d.isInFilter == "visible") {
+                d3.select(this).attr("stroke","black");
+            }
+        });
+}
+
+    
+    
+function isInArray(searchTerm,array)
+{
+    var count=array.length;
+    for(var i=0;i<count;i++)
+    {
+        if(array[i]===searchTerm){return true;}
+    }
+    return false;
+}
+
+//closure of the D3 Json function 
+});
+
+
+
+</script>
+
+   
+   
+  </body>
+</html>
