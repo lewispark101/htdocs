@@ -8,7 +8,7 @@ font-size: 11px
 }
 
 body { 
- background: url('lib/assets/edf1.jpg') no-repeat center center fixed; 
+
  -webkit-background-size: cover;
  -moz-background-size: cover;
  -o-background-size: cover;
